@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper Pro+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body oncontextmenu="return false;">
+
+    <div id="bg-effects"></div>
+
+    <div class="container">
+        <section id="auth-card" class="card">
+            <h1>MINESWEEPER<span class="glitch">PRO+</span></h1>
+            <div class="input-group">
+                <input type="text" id="username-input" placeholder="Korisničko ime..." class="input-field" maxlength="15">
+                <small id="login-error" class="error-msg hidden">Ime je prekratko!</small>
+            </div>
+            <div class="menu-buttons">
+                <button class="btn btn-primary" onclick="login()">
+                    <span class="btn-text">PRIJAVI SE</span>
+                    <div class="btn-hover-effect"></div>
+                </button>
+                <button class="btn" onclick="playAsGuest()">IGRAJ KAO GOST</button>
+            </div>
+        </section>
+
+        <section id="menu" class="card hidden">
+            <div class="profile-summary">
+                <h2 id="welcome-msg">Dobrodošli, Agent</h2>
+                <div class="global-stats">
+                    <span class="stat-item">Ukupno mina: <b id="total-mines-stat">0</b></span>
+                </div>
+            </div>
+            
+            <div class="settings-group">
+                <div class="selection-wrapper">
+                    <label for="difficulty-select">OPERATIVNA TEŽINA</label>
+                    <select id="difficulty-select" class="input-field" onchange="toggleCustom()">
+                        <option value="easy">Easy (6x6)</option>
+                        <option value="medium" selected>Medium (10x10)</option>
+                        <option value="hard">Hard (15x15)</option>
+                        <option value="impossible">Impossible (20x20)</option>
+                        <option value="custom">Custom Mode</option>
+                    </select>
+                </div>
+                
+                <div id="custom-inputs" class="custom-grid-setup hidden">
+                    <div class="mini-input">
+                        <label>Veličina</label>
+                        <input type="number" id="custom-size" value="10" min="5" max="30" class="input-field">
+                    </div>
+                    <div class="mini-input">
+                        <label>Mine</label>
+                        <input type="number" id="custom-mines" value="15" min="1" class="input-field">
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn btn-primary" onclick="startGame('Training')">POKRENI TRENING</button>
+                <button class="btn" onclick="startGame('Career')">ZAPOČNI KARIJERU</button>
+            </div>
+            <p id="high-level-display" class="career-status"></p>
+        </section>
+
+        <header id="hud" class="card hidden">
+            <div class="hud-content">
+                <div class="hud-user">
+                    <span class="label">AGENT:</span>
+                    <span id="current-user" class="value"></span>
+                </div>
+                <div class="hud-main-stats">
+                    <div class="stat">
+                        <span class="label">LVL</span>
+                        <span id="level-val" class="value">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">MINES</span>
+                        <span id="mine-val" class="value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">TIME</span>
+                        <span id="timer-val" class="value">00:00</span>
+                    </div>
+                </div>
+                <button class="btn-exit" onclick="confirmExit()" title="Prekini misiju">×</button>
+            </div>
+        </header>
+
+        <main id="game-container" class="hidden">
+            <div id="game-scroll-wrapper">
+                <div id="game"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="message-overlay" class="overlay hidden">
+        <div class="overlay-content card">
+            <div class="icon-box" id="result-icon"></div>
+            <h2 id="overlay-title">POBJEDA</h2>
+            <p id="overlay-text">Sva polja su uspješno dekodirana.</p>
+            <div class="reward-info hidden" id="reward-box">
+                +1 Career Level
+            </div>
+            <button class="btn btn-primary" onclick="closeOverlay()">NASTAVI</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
