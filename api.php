@@ -32,7 +32,7 @@ if ($action == 'login') {
     }
 
     // Koristimo Prepared Statement za sigurnost
-    $stmt = $conn->prepare("SELECT level FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT level, total_mines_cleared FROM users WHERE username = ?");
     $stmt->bind_param("s", $user);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -42,7 +42,8 @@ if ($action == 'login') {
         echo json_encode([
             "status" => "success", 
             "message" => "Dobrodošli natrag!", 
-            "level" => (int)$row['level']
+            "level" => (int)$row['level'],
+            "coins" => (int)$row['total_mines_cleared']
         ]);
     } else {
         // Novi igrač - nivo 1
@@ -56,31 +57,74 @@ if ($action == 'login') {
     }
 }
 
-// --- SPREMANJE PROGRESA ---
+// --- SPREMANJE PROGRESA I STATISTIKE ---
 if ($action == 'save') {
     $user = trim($_POST['username'] ?? '');
     $lvl = (int)($_POST['level'] ?? 0);
+    $won = (int)($_POST['won'] ?? 0);
+    $mines_cleared = (int)($_POST['mines_cleared'] ?? 0);
 
-    if (empty($user) || $lvl <= 0) {
+    if (empty($user)) {
         echo json_encode(["status" => "error", "message" => "Nevažeći podaci."]);
         exit;
     }
 
-    // NAPREDNO: Ne dozvoli smanjivanje nivoa u bazi (anti-cheat osnovno)
-    // Spremamo samo ako je novi nivo veći od starog
-    $stmt = $conn->prepare("UPDATE users SET level = ? WHERE username = ? AND level < ?");
-    $stmt->bind_param("isi", $lvl, $user, $lvl);
+    $stmt = $conn->prepare("UPDATE users SET 
+        level = GREATEST(level, ?),
+        total_games_played = total_games_played + 1,
+        total_games_won = total_games_won + ?,
+        total_mines_cleared = total_mines_cleared + ?,
+        high_score_mines = GREATEST(high_score_mines, ?)
+        WHERE username = ?
+    ");
+    $stmt->bind_param("iiiis", $lvl, $won, $mines_cleared, $mines_cleared, $user);
     
     if ($stmt->execute()) {
-        $affected = $stmt->affected_rows;
-        echo json_encode([
-            "status" => "saved", 
-            "updated" => $affected > 0,
-            "message" => $affected > 0 ? "Napredak spremljen!" : "Nivo je već isti ili veći."
-        ]);
+        echo json_encode(["status" => "saved", "message" => "Napredak i statistika spremljeni!"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Greška na serveru pri spremanju."]);
     }
+}
+
+// --- TRGOVINA (KUPNJA POWER-UPA) ---
+if ($action == 'buy') {
+    $user = trim($_POST['username'] ?? '');
+    $cost = (int)($_POST['cost'] ?? 0);
+    
+    $stmt = $conn->prepare("SELECT total_mines_cleared FROM users WHERE username = ?");
+    $stmt->bind_param("s", $user);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    
+    if ($res->num_rows > 0) {
+        $row = $res->fetch_assoc();
+        if ($row['total_mines_cleared'] >= $cost) {
+            $upd = $conn->prepare("UPDATE users SET total_mines_cleared = total_mines_cleared - ? WHERE username = ?");
+            $upd->bind_param("is", $cost, $user);
+            if ($upd->execute()) {
+                echo json_encode(["status" => "success", "new_balance" => $row['total_mines_cleared'] - $cost]);
+                exit;
+            }
+        } else {
+            echo json_encode(["status" => "error", "message" => "Nedovoljno sredstava!"]);
+            exit;
+        }
+    }
+    echo json_encode(["status" => "error", "message" => "Greška na serveru."]);
+    exit;
+}
+
+// --- LEADERBOARD ---
+if ($action == 'leaderboard') {
+    // Sortira po high_score_mines pa po levelu
+    $result = $conn->query("SELECT username, level, high_score_mines, total_games_played, total_games_won FROM users ORDER BY level DESC, high_score_mines DESC LIMIT 10");
+    $topPlayers = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $topPlayers[] = $row;
+        }
+    }
+    echo json_encode(["status" => "success", "leaderboard" => $topPlayers]);
 }
 
 $conn->close();

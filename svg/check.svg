@@ -1,0 +1,19 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Animacija crtanja kvačice -->
+    <style>
+        .check-path {
+            stroke-dasharray: 40;
+            stroke-dashoffset: 40;
+            animation: drawCheck 0.5s ease-out forwards;
+        }
+        @keyframes drawCheck {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+
+    <!-- Kvačica -->
+    <path d="M5 12l5 5L20 7"
+          fill="none" stroke="#00d2ff" stroke-width="3"
+          stroke-linecap="round" stroke-linejoin="round"
+          class="check-path"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Vanjski krug -->
+    <circle cx="12" cy="12" r="10" fill="none" stroke="#111" stroke-width="2"/>
+
+    <!-- Unutarnji krug -->
+    <circle cx="12" cy="12" r="6" fill="none" stroke="#111" stroke-width="2"/>
+
+    <!-- Središte (bullseye) -->
+    <circle cx="12" cy="12" r="2" fill="#111"/>
+
+    <!-- Križne linije nišana -->
+    <path d="M12 2 v4 M12 18 v4 M2 12 h4 M18 12 h4"
+          stroke="#111" stroke-width="2" stroke-linecap="round"/>
+</svg>

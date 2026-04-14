@@ -1,0 +1,16 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Krug sata -->
+    <circle cx="12" cy="14" r="8" fill="none" stroke="#00d2ff" stroke-width="2"/>
+
+    <!-- Gumb na vrhu -->
+    <rect x="10" y="3" width="4" height="3" rx="1" fill="#00d2ff"/>
+
+    <!-- Kazaljke -->
+    <path d="M12 10 v4 l3 2"
+          fill="none" stroke="#00d2ff" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Bočni gumb -->
+    <path d="M18 7 l2 -2"
+          stroke="#00d2ff" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,57 @@
+/* MATRIX THEME (Level 10+) */
+body.theme-matrix {
+    background: #000 !important;
+    font-family: monospace, sans-serif !important;
+}
+body.theme-matrix * {
+    font-family: monospace, sans-serif !important;
+}
+body.theme-matrix .card {
+    background: rgba(0, 20, 0, 0.8) !important;
+    border-color: #0f0 !important;
+    box-shadow: 0 0 20px rgba(0,255,0,0.3) !important;
+}
+body.theme-matrix .btn { border-color: #0f0; color: #0f0; background: transparent; }
+body.theme-matrix .btn:hover { background: rgba(0,255,0,0.2); box-shadow: 0 0 10px #0f0; }
+body.theme-matrix .btn-primary { background: #050; border: 1px solid #0f0; }
+body.theme-matrix .cell.open { background: #000; border: 1px solid #0f0; color: #0f0; text-shadow: 0 0 5px #0f0; }
+body.theme-matrix .cell { border: 1px solid rgba(0,255,0,0.2); background: rgba(0,50,0,0.3); }
+
+/* CYBERPUNK THEME (Level 5+) */
+body.theme-cyberpunk {
+    background: linear-gradient(135deg, #09001b 0%, #20002c 100%) !important;
+}
+body.theme-cyberpunk .card {
+    background: rgba(255, 0, 128, 0.1) !important;
+    border-color: #fcee0a !important;
+    border-right: 4px solid #00fff9 !important;
+    border-bottom: 4px solid #fcee0a !important;
+}
+body.theme-cyberpunk .btn { border-color: #00fff9; color: #00fff9; border-radius: 0; text-transform: uppercase; }
+body.theme-cyberpunk .btn-primary { background: #ff007f; color: #fff; border: 2px solid #fcee0a; }
+body.theme-cyberpunk .cell.open { background: #111; color: #00fff9; border: 1px solid #ff007f; }
+body.theme-cyberpunk .cell { background: rgba(252, 238, 10, 0.2); border-radius: 0; }
+
+/* RETRO WIN95 THEME (Level 15+) */
+body.theme-retro {
+    background: #008080 !important;
+    font-family: "MS Sans Serif", Arial, sans-serif !important;
+}
+body.theme-retro .card {
+    background: #c0c0c0 !important;
+    border: none !important;
+    border-top: 2px solid #fff !important;
+    border-left: 2px solid #fff !important;
+    border-bottom: 2px solid #000 !important;
+    border-right: 2px solid #000 !important;
+    border-radius: 0 !important;
+    color: #000 !important;
+}
+body.theme-retro .btn {
+    background: #c0c0c0; border: none; border-top: 2px solid #fff; border-left: 2px solid #fff; border-bottom: 2px solid #000; border-right: 2px solid #000;
+    color: #000; border-radius: 0;
+}
+body.theme-retro .btn:active { border-top: 2px solid #000; border-left: 2px solid #000; border-bottom: 2px solid #fff; border-right: 2px solid #fff; }
+body.theme-retro .cell { background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #808080; border-bottom: 2px solid #808080; border-radius: 0; }
+body.theme-retro .cell.open { background: #c0c0c0; border: 1px solid #808080; }
+body.theme-retro * { text-shadow: none !important; }

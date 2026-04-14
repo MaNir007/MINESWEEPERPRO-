@@ -1,0 +1,11 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Vanjski krug -->
+    <circle cx="12" cy="12" r="10" fill="#ffeb3b" stroke="#f57f17" stroke-width="2"/>
+
+    <!-- Unutarnji prsten -->
+    <circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+
+    <!-- Znak valute ($) -->
+    <path d="M12 7 v10 M10 9 h4 M10 15 h4"
+          stroke="#f57f17" stroke-width="2" stroke-linecap="round"/>
+</svg>

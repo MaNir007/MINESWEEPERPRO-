@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper Pro+</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/themes.css">
 </head>
 <body oncontextmenu="return false;">
 
@@ -63,7 +67,45 @@
                 <button class="btn btn-primary" onclick="startGame('Training')">POKRENI TRENING</button>
                 <button class="btn" onclick="startGame('Career')">ZAPOČNI KARIJERU</button>
             </div>
+            
+            <div class="mini-games-section section-divider">
+                <h3 class="section-title">SPESIJALNE OPERACIJE</h3>
+                <div class="menu-buttons">
+                    <button class="btn btn-primary btn-daily" onclick="startGame('Daily')">
+                        <span data-svg="target" data-width="18" data-height="18" data-class="svg-target"></span>
+                        DNEVNI IZAZOV
+                    </button>
+                    <button class="btn" onclick="startGame('MineDash')">MINE DASH (SPEED)</button>
+                    <button class="btn" onclick="startGame('TreasureHunter')">TREASURE HUNTER (MEMORIJA)</button>
+                    <button class="btn" onclick="startGame('ChainReaction')">CHAIN REACTION (PUZZLE)</button>
+                </div>
+            </div>
+            <div id="shop-section" class="section-divider">
+                <h3 class="section-title gold">
+                    CRNO TRŽIŠTE 
+                    <span class="coins-container">
+                        <span id="coins-display">0</span> 
+                        <span data-svg="coin" data-width="18" data-height="18" data-class="svg-coin"></span>
+                    </span>
+                </h3>
+                <div class="perk-btn-group">
+                    <button class="btn btn-small btn-perk" onclick="buyPerk('radar', 50)">
+                        RADAR (50 <span data-svg="coin" data-width="14" data-height="14"></span>)
+                    </button>
+                    <button class="btn btn-small btn-perk" onclick="buyPerk('defuse', 100)">
+                        DEFUSE KIT (100 <span data-svg="coin" data-width="14" data-height="14"></span>)
+                    </button>
+                </div>
+            </div>
+            
             <p id="high-level-display" class="career-status"></p>
+            
+            <div id="leaderboard-section" class="section-divider">
+                <h3 class="section-title gold">TOP 10 AGENTA</h3>
+                <ul id="leaderboard-list" class="leaderboard-list">
+                    <li class="leaderboard-empty">Učitavanje...</li>
+                </ul>
+            </div>
         </section>
 
         <header id="hud" class="card hidden">
@@ -109,6 +151,11 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/svg-loader.js?v=2.1"></script>
+    <script src="js/globals.js?v=2.1"></script>
+    <script src="js/api.js?v=2.1"></script>
+    <script src="js/ui.js?v=2.1"></script>
+    <script src="js/timer.js?v=2.1"></script>
+    <script src="js/game.js?v=2.1"></script>
 </body>
 </html>

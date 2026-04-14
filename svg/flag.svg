@@ -1,0 +1,9 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Stijeg zastavice -->
+    <path d="M6 22V2 M6 4l12 4-12 4"
+          fill="none" stroke="#ff4b2b" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Vrh stupa -->
+    <circle cx="6" cy="2" r="1.5" fill="#ffeb3b"/>
+</svg>

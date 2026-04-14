@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Munja -->
+    <path d="M13 2 L5 14 h6 l-2 8 L21 10 h-6 l2 -8z"
+          fill="#ffeb3b" stroke="#f57f17" stroke-width="1"
+          stroke-linejoin="round"/>
+</svg>

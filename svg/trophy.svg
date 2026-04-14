@@ -1,0 +1,28 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Animacija dragulja -->
+    <style>
+        .trophy-gem {
+            animation: gemGlow 1.5s infinite alternate;
+            transform-origin: center;
+        }
+        @keyframes gemGlow {
+            from { opacity: 0.5; filter: blur(1px); }
+            to   { opacity: 1;   filter: blur(2px) drop-shadow(0 0 8px #00d2ff); }
+        }
+    </style>
+
+    <!-- Pehar -->
+    <path d="M4 4h16v6a8 8 0 0 1-16 0z"
+          fill="none" stroke="#ffeb3b" stroke-width="2"/>
+
+    <!-- Postolje -->
+    <path d="M12 18v4 m-4 0h8"
+          stroke="#ffeb3b" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Ručke -->
+    <path d="M4 7H2v2a3 3 0 0 0 3 3h2 m13-5h2v2a3 3 0 0 1-3 3h-2"
+          fill="none" stroke="#ffeb3b" stroke-width="2"/>
+
+    <!-- Dragulj u sredini -->
+    <circle cx="12" cy="10" r="2" fill="#00d2ff" class="trophy-gem"/>
+</svg>

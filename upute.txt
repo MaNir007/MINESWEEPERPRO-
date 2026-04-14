@@ -1,0 +1,22 @@
+1. Mine Dash (Time Attack)
+Umjesto da čistiš cijelu mapu, cilj je što brže pronaći samo jednu sigurnu stazu s lijeva na desno.
+
+Mehanika: Svaki red ima samo jedno ili dva sigurna polja. Ako pogriješiš, vraćaš se na početak reda.
+
+Izazov: Vrijeme istječe (npr. imaš 30 sekundi), a svako točno polje dodaje +2 sekunde.
+
+2. Treasure Hunter (Memory Mode)
+Ovo je obrnuti Minesweeper.
+
+Mehanika: Na početku se na 2 sekunde pokažu lokacije svih mina, a zatim nestanu.
+
+Cilj: Moraš kliknuti na sva polja koja NISU bila mine, oslanjajući se isključivo na pamćenje.
+
+Težina: Sa svakim nivoom vrijeme prikazivanja mina se skraćuje.
+
+3. Chain Reaction (Puzzle Mode)
+Dobiješ već djelomično otvorenu mapu s brojevima, ali imaš ograničen broj zastavica.
+
+Mehanika: Moraš označiti sve mine, ali ako postaviš zastavicu na krivo mjesto, gubiš bodove ili "energiju".
+
+Cilj: Logičko rješavanje specifičnih situacija bez nagađanja.

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>SVG Ikone - Minesweeper Pro+</title>
+    <style>
+        /* ===== SVG IKONE KOD ===== */
+        /* Ova stranica sadrži SVG inline kod svih ikona korištenih u igri.
+           Svaka ikona se poziva pomoću njenog ID-a preko svg-loader.js */
+
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #0a0e1a;
+            color: #ccc;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        h1 { color: #00d2ff; text-align: center; }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        .icon-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,210,255,0.15);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .icon-card h3 {
+            color: #00d2ff;
+            margin-bottom: 12px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .icon-card svg { width: 64px; height: 64px; }
+        .icon-card code {
+            display: block;
+            margin-top: 12px;
+            color: #ffeb3b;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SVG IKONE — MINESWEEPER PRO+</h1>
+    <p style="text-align:center;opacity:0.5;">Inline SVG kod svih ikona. Koristi se putem <code>Icons.ime</code> u JavaScript-u.</p>
+
+    <div class="icon-grid">
+
+        <!-- ===== BOLT (Munja) ===== -->
+        <div class="icon-card">
+            <h3>Bolt</h3>
+            <svg id="svg-bolt" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Munja -->
+                <path d="M13 2 L5 14 h6 l-2 8 L21 10 h-6 l2 -8z"
+                      fill="#ffeb3b" stroke="#f57f17" stroke-width="1"
+                      stroke-linejoin="round"/>
+            </svg>
+            <code>Icons.bolt</code>
+        </div>
+
+        <!-- ===== CHECK (Kvačica) ===== -->
+        <div class="icon-card">
+            <h3>Check</h3>
+            <svg id="svg-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Animacija crtanja kvačice -->
+                <style>
+                    .check-path {
+                        stroke-dasharray: 40;
+                        stroke-dashoffset: 40;
+                        animation: drawCheck 0.5s ease-out forwards;
+                    }
+                    @keyframes drawCheck {
+                        to { stroke-dashoffset: 0; }
+                    }
+                </style>
+                <!-- Kvačica -->
+                <path d="M5 12l5 5L20 7"
+                      fill="none" stroke="#00d2ff" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      class="check-path"/>
+            </svg>
+            <code>Icons.check</code>
+        </div>
+
+        <!-- ===== COIN (Novčić) ===== -->
+        <div class="icon-card">
+            <h3>Coin</h3>
+            <svg id="svg-coin" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Vanjski krug -->
+                <circle cx="12" cy="12" r="10" fill="#ffeb3b" stroke="#f57f17" stroke-width="2"/>
+                <!-- Unutarnji prsten -->
+                <circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+                <!-- Znak valute ($) -->
+                <path d="M12 7 v10 M10 9 h4 M10 15 h4"
+                      stroke="#f57f17" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <code>Icons.coin</code>
+        </div>
+
+        <!-- ===== EXPLOSION (Eksplozija) ===== -->
+        <div class="icon-card">
+            <h3>Explosion</h3>
+            <svg id="svg-explosion" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Animacije eksplozije -->
+                <style>
+                    .burst {
+                        animation: burstExpand 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+                        transform-origin: center;
+                    }
+                    @keyframes burstExpand {
+                        0%   { transform: scale(0.5) rotate(0deg);   opacity: 1;   stroke: #ffeb3b; }
+                        50%  { transform: scale(1.2) rotate(45deg);  opacity: 0.8; stroke: #ff4b2b; }
+                        100% { transform: scale(0.8) rotate(90deg);  opacity: 0;   stroke: #9c27b0; }
+                    }
+                    .core {
+                        animation: corePulse 1s infinite alternate;
+                        transform-origin: center;
+                    }
+                    @keyframes corePulse {
+                        from { transform: scale(1); }
+                        to   { transform: scale(2.5); fill: #ffffff; }
+                    }
+                </style>
+                <!-- Zvijezda eksplozije -->
+                <path d="M12 2l2 4 4-2-1 4 4 1-3 3 3 3-4 1 1 4-4-2-2 4-2-4-4 2 1-4-4-1 3-3-3-3 4-1-1-4 4 2z"
+                      fill="none" stroke="#ff4b2b" stroke-width="2" class="burst"/>
+                <!-- Jezgra -->
+                <circle cx="12" cy="12" r="3" fill="#ffeb3b" class="core"/>
+            </svg>
+            <code>Icons.explosion</code>
+        </div>
+
+        <!-- ===== FLAG (Zastavica) ===== -->
+        <div class="icon-card">
+            <h3>Flag</h3>
+            <svg id="svg-flag" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stijeg zastavice -->
+                <path d="M6 22V2 M6 4l12 4-12 4"
+                      fill="none" stroke="#ff4b2b" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Vrh stupa -->
+                <circle cx="6" cy="2" r="1.5" fill="#ffeb3b"/>
+            </svg>
+            <code>Icons.flag</code>
+        </div>
+
+        <!-- ===== MINE (Mina) ===== -->
+        <div class="icon-card">
+            <h3>Mine</h3>
+            <svg id="svg-mine" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Animacije za minu -->
+                <style>
+                    .fuse-spark {
+                        stroke-dasharray: 10;
+                        animation: fuseBurn 1s linear infinite;
+                    }
+                    @keyframes fuseBurn {
+                        0%   { stroke-dashoffset: 10; }
+                        100% { stroke-dashoffset: 0; }
+                    }
+                    .mine-blink {
+                        animation: mineBlink 1s infinite alternate;
+                        transform-origin: center;
+                    }
+                    @keyframes mineBlink {
+                        from { fill: #ff4b2b; transform: scale(1); }
+                        to   { fill: #ffeb3b; transform: scale(1.5); }
+                    }
+                </style>
+                <!-- Tijelo mine -->
+                <circle cx="12" cy="14" r="6" fill="rgba(0,0,0,0.5)" stroke="#ff4b2b" stroke-width="2"/>
+                <!-- Detonator -->
+                <rect x="10" y="5" width="4" height="3" fill="#ff4b2b"/>
+                <!-- Fitilj s iskrom -->
+                <path d="M12 5 C 12 1, 15 1, 16 3"
+                      fill="none" stroke="#ffeb3b" stroke-width="1.5"
+                      stroke-linecap="round" class="fuse-spark"/>
+                <!-- Središte (blink) -->
+                <circle cx="12" cy="14" r="2" fill="#ff4b2b" class="mine-blink"/>
+            </svg>
+            <code>Icons.mine</code>
+        </div>
+
+        <!-- ===== STOPWATCH (Štoperica) ===== -->
+        <div class="icon-card">
+            <h3>Stopwatch</h3>
+            <svg id="svg-stopwatch" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Krug sata -->
+                <circle cx="12" cy="14" r="8" fill="none" stroke="#00d2ff" stroke-width="2"/>
+                <!-- Gumb na vrhu -->
+                <rect x="10" y="3" width="4" height="3" rx="1" fill="#00d2ff"/>
+                <!-- Kazaljke -->
+                <path d="M12 10 v4 l3 2"
+                      fill="none" stroke="#00d2ff" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Bočni gumb -->
+                <path d="M18 7 l2 -2"
+                      stroke="#00d2ff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <code>Icons.stopwatch</code>
+        </div>
+
+        <!-- ===== TARGET (Nišan) ===== -->
+        <div class="icon-card">
+            <h3>Target</h3>
+            <svg id="svg-target" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Vanjski krug -->
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#111" stroke-width="2"/>
+                <!-- Unutarnji krug -->
+                <circle cx="12" cy="12" r="6" fill="none" stroke="#111" stroke-width="2"/>
+                <!-- Središte (bullseye) -->
+                <circle cx="12" cy="12" r="2" fill="#111"/>
+                <!-- Križne linije nišana -->
+                <path d="M12 2 v4 M12 18 v4 M2 12 h4 M18 12 h4"
+                      stroke="#111" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <code>Icons.target</code>
+        </div>
+
+        <!-- ===== TROPHY (Pehar) ===== -->
+        <div class="icon-card">
+            <h3>Trophy</h3>
+            <svg id="svg-trophy" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- Animacija dragulja -->
+                <style>
+                    .trophy-gem {
+                        animation: gemGlow 1.5s infinite alternate;
+                        transform-origin: center;
+                    }
+                    @keyframes gemGlow {
+                        from { opacity: 0.5; filter: blur(1px); }
+                        to   { opacity: 1;   filter: blur(2px) drop-shadow(0 0 8px #00d2ff); }
+                    }
+                </style>
+                <!-- Pehar -->
+                <path d="M4 4h16v6a8 8 0 0 1-16 0z"
+                      fill="none" stroke="#ffeb3b" stroke-width="2"/>
+                <!-- Postolje -->
+                <path d="M12 18v4 m-4 0h8"
+                      stroke="#ffeb3b" stroke-width="2" stroke-linecap="round"/>
+                <!-- Ručke -->
+                <path d="M4 7H2v2a3 3 0 0 0 3 3h2 m13-5h2v2a3 3 0 0 1-3 3h-2"
+                      fill="none" stroke="#ffeb3b" stroke-width="2"/>
+                <!-- Dragulj u sredini -->
+                <circle cx="12" cy="10" r="2" fill="#00d2ff" class="trophy-gem"/>
+            </svg>
+            <code>Icons.trophy</code>
+        </div>
+
+        <!-- ===== WRONG (Pogrešno/X) ===== -->
+        <div class="icon-card">
+            <h3>Wrong (X)</h3>
+            <svg id="svg-wrong" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6l12 12" 
+                      stroke="#ff4b2b" stroke-width="3" 
+                      stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <code>Icons.wrong</code>
+        </div>
+
+    </div>
+</body>
+</html>
