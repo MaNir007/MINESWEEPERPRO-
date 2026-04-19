@@ -3,7 +3,7 @@ async function login() {
     const nameInput = document.getElementById("username-input");
     const name = nameInput.value.trim();
     
-    if (name.length < 3) return alert("Ime mora imati min. 3 znaka!");
+    if (name.length < 3) return Notifier.error("Agent: Identitet prekratak (min. 3 znaka)!");
 
     const formData = new FormData();
     formData.append("username", name);

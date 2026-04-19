@@ -201,3 +201,24 @@
     text-shadow: 0 0 5px rgba(255, 75, 43, 0.5);
     line-height: 1;
 }
+
+.radar-pulse {
+    animation: radarPulseAnim 2.5s ease-out;
+    background: rgba(0, 210, 255, 0.4) !important;
+    z-index: 5;
+}
+
+@keyframes radarPulseAnim {
+    0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); transform: scale(1); }
+    30% { box-shadow: 0 0 20px 10px rgba(0, 210, 255, 0); transform: scale(1.05); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); transform: scale(1); }
+}
+
+.disarm-spark {
+    animation: disarmSparkAnim 0.6s ease-out;
+}
+
+@keyframes disarmSparkAnim {
+    0% { filter: brightness(3) saturate(2); transform: scale(1); }
+    100% { filter: brightness(1) saturate(1); transform: scale(1.1); }
+}

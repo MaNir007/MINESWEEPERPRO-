@@ -1,3 +1,28 @@
+// --- PERK CONFIRMATION MODAL ---
+window.requestPerk = function(type, cost) {
+    const title = type === 'radar' ? "RADAR SKENER" : "DEFUSE KIT (OKLOP)";
+    const desc = type === 'radar' 
+        ? "Aktivira holografski puls koji skenira 3x3 područje. Nakratko prikazuje položaj mina i brojeve ispod polja."
+        : "Automatski deaktivira prvu nagaznu minu na koju naiđete. Mina se pretvara u sigurno polje bez eksplozije.";
+    
+    document.getElementById("perk-title").innerText = title;
+    document.getElementById("perk-desc").innerText = desc;
+    document.getElementById("perk-cost").innerText = cost;
+    
+    // Postavi akciju na KUPI gumb
+    const confirmBtn = document.getElementById("perk-confirm-btn");
+    confirmBtn.onclick = () => {
+        closePerkModal();
+        buyPerk(type, cost); // Poziva originalnu funkciju iz api.js
+    };
+    
+    document.getElementById("perk-modal").classList.remove("hidden");
+};
+
+window.closePerkModal = function() {
+    document.getElementById("perk-modal").classList.add("hidden");
+};
+
 // --- UI I EFEKTI ---
 function showMenu() {
     document.getElementById("auth-card").classList.add("hidden");
@@ -142,3 +167,5 @@ async function startReplay() {
         showOverlay("REPLAY GOTOV", "Prikaz uspješne misije je završen.");
     }, 800);
 }
+
+

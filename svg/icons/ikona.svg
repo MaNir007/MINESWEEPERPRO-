@@ -1,0 +1,15 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <!-- Pozadina -->
+    <circle cx="256" cy="256" r="230" fill="#0f0c29" stroke="#00d2ff" stroke-width="24"/>
+    
+    <!-- Detalji mine (šiljci/krst) -->
+    <path d="M256 80 L256 432 M80 256 L432 256" stroke="#ff4b2b" stroke-width="40" stroke-linecap="round"/>
+    <path d="M131 131 L381 381 M131 381 L381 131" stroke="#ff4b2b" stroke-width="40" stroke-linecap="round"/>
+    
+    <!-- Jezgro mine -->
+    <circle cx="256" cy="256" r="100" fill="#ff4b2b"/>
+    <circle cx="256" cy="256" r="40" fill="#0f0c29"/>
+    
+    <!-- Plus simbol (PRO+) -->
+    <path d="M380 130 L440 130 M410 100 L410 160" stroke="#00d2ff" stroke-width="20" stroke-linecap="round"/>
+</svg>

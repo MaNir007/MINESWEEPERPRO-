@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper Pro+</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/buttons.css">
-    <link rel="stylesheet" href="css/game.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/base.css?v=3.0">
+    <link rel="stylesheet" href="css/buttons.css?v=3.0">
+    <link rel="stylesheet" href="css/game.css?v=3.0">
+    <link rel="stylesheet" href="css/animations.css?v=3.0">
+    <link rel="stylesheet" href="css/themes.css?v=3.0">
+    <link rel="icon" type="image/svg+xml" href="svg/icons/ikona.svg">
 </head>
 <body oncontextmenu="return false;">
 
@@ -20,7 +21,7 @@
             <h1>MINESWEEPER<span class="glitch">PRO+</span></h1>
             <div class="input-group">
                 <input type="text" id="username-input" placeholder="Korisničko ime..." class="input-field" maxlength="15">
-                <small id="login-error" class="error-msg hidden">Ime je prekratko!</small>
+
             </div>
             <div class="menu-buttons">
                 <button class="btn btn-primary" onclick="login()">
@@ -89,10 +90,10 @@
                     </span>
                 </h3>
                 <div class="perk-btn-group">
-                    <button class="btn btn-small btn-perk" onclick="buyPerk('radar', 50)">
+                    <button class="btn btn-small btn-perk" onclick="requestPerk('radar', 50)">
                         RADAR (50 <span data-svg="coin" data-width="14" data-height="14"></span>)
                     </button>
-                    <button class="btn btn-small btn-perk" onclick="buyPerk('defuse', 100)">
+                    <button class="btn btn-small btn-perk" onclick="requestPerk('defuse', 100)">
                         DEFUSE KIT (100 <span data-svg="coin" data-width="14" data-height="14"></span>)
                     </button>
                 </div>
@@ -139,6 +140,7 @@
         </main>
     </div>
 
+    <!-- Modali i Top-level elementi (izvan container-a za z-index) -->
     <div id="message-overlay" class="overlay hidden">
         <div class="overlay-content card">
             <div class="icon-box" id="result-icon"></div>
@@ -151,11 +153,28 @@
         </div>
     </div>
 
-    <script src="js/svg-loader.js?v=2.1"></script>
-    <script src="js/globals.js?v=2.1"></script>
-    <script src="js/api.js?v=2.1"></script>
-    <script src="js/ui.js?v=2.1"></script>
-    <script src="js/timer.js?v=2.1"></script>
-    <script src="js/game.js?v=2.1"></script>
+    <!-- Modal za potvrdu kupnje Perka -->
+    <div id="perk-modal" class="overlay hidden">
+        <div class="overlay-content card">
+            <h2 id="perk-title">POWER-UP</h2>
+            <p id="perk-desc">Opis moći...</p>
+            <div id="perk-price-tag">Cijena: <span id="perk-cost">0</span> <span data-svg="coin" data-width="20" data-height="20" style="vertical-align: middle;"></span></div>
+            <div class="perk-actions">
+                <button class="btn btn-primary" id="perk-confirm-btn">KUPI</button>
+                <button class="btn btn-secondary" onclick="closePerkModal()">ODUSTANI</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <script src="js/notifier.js?v=3.0"></script>
+    <script src="js/svg-loader.js?v=3.0"></script>
+    <script src="js/globals.js?v=3.0"></script>
+    <script src="js/api.js?v=3.0"></script>
+    <script src="js/ui.js?v=3.0"></script>
+    <script src="js/timer.js?v=3.0"></script>
+    <script src="js/game.js?v=3.0"></script>
+    <script src="js/cheats.js?v=3.0"></script>
 </body>
 </html>

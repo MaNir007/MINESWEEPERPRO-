@@ -235,15 +235,29 @@ function processCellClick(x, y) {
     if (grid[y][x].mine) {
         if (hasDefuseKit) {
             hasDefuseKit = false;
-            let div = document.getElementById(`cell-${x}-${y}`);
-            div.classList.add("open");
-            div.innerHTML = `<span class="cell-shield">🛡️</span>`;
-            grid[y][x].open = true;
-            SFX.playBoom(); // Mali prigušeni boom
+            SFX.playBoom(); // Prigušeni bum
             document.body.classList.add("shake");
             setTimeout(() => document.body.classList.remove("shake"), 300);
+            
+            // DISARM MEHANIKA: Pretvaramo minu u prazno polje
+            grid[y][x].mine = false;
+            // Ponovno izračunaj brojeve oko te mine
+            calculateNumbers(); 
+            // Otkrij polje kao da je sigurno
+            revealCell(x, y);
+            
+            console.log("Mina uspješno deaktivirana oklopom!");
             return;
         } else {
+            if (isInvincible) {
+                let div = document.getElementById(`cell-${x}-${y}`);
+                div.classList.add("mine");
+                div.innerHTML = Icons.mine;
+                grid[y][x].open = true;
+                SFX.playBoom();
+                console.log("GodMode: Mina izbjegnuta!");
+                return;
+            }
             triggerGameOver(x, y);
         }
     } else {
@@ -256,20 +270,31 @@ function processCellClick(x, y) {
 function radarScan(x, y) {
     radarActive = false;
     document.body.classList.remove("cursor-target");
-    SFX.playClick();
+    SFX.playBoom(); // Skeniranje zvuk
     
-    // Provjera funkcije dodjeljivanjem privremene CSS animacije ili stila
     const radarHighlight = (nx, ny) => {
         let div = document.getElementById(`cell-${nx}-${ny}`);
-        div.classList.add("radar-highlight");
-        setTimeout(() => div.classList.remove("radar-highlight"), 3000);
+        div.classList.add("radar-pulse");
+        
+        // Ako je mina, pokaži je nakratko
+        if (grid[ny][nx].mine) {
+            div.innerHTML = Icons.mine;
+        } else {
+            // Ako nije mina, pokaži broj nakratko
+            div.innerText = grid[ny][nx].count || "";
+        }
+        
+        setTimeout(() => {
+            div.classList.remove("radar-pulse");
+            if (!grid[ny][nx].open) {
+                div.innerHTML = grid[ny][nx].flagged ? Icons.flag : "";
+                div.innerText = "";
+            }
+        }, 2500);
     };
 
-    iterateNeighbors(x, y, (nx, ny) => {
-        if (grid[ny][nx].mine && !grid[ny][nx].open) radarHighlight(nx, ny);
-    });
-    // Provjera i same ciljane ćelije
-    if (grid[y][x].mine && !grid[y][x].open) radarHighlight(x, y);
+    iterateNeighbors(x, y, (nx, ny) => radarHighlight(nx, ny));
+    radarHighlight(x, y);
 }
 
 function revealCell(x, y) {

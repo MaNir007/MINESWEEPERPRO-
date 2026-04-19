@@ -27,6 +27,10 @@ let gameReplay = [];
 let isReplaying = false;
 let startTime = 0;
 
+// Cheat / Easter Egg flags
+let isInvincible = false;
+let isXrayActive = false;
+
 // Seed generator for Daily Challenge
 function mulberry32(a) {
     return function() {
