@@ -57,69 +57,57 @@ Kako biste pokrenuli projekt lokalno, slijedite ove korake:
 
 ---
 
-## 📖 Detaljne Upute i Vodič (iz upute.txt)
+## 📖 Detaljne Upute i Vodič
 
-```text
-=========================================
-      MINESWEEPER PRO - UPUTE I VODIČ
-=========================================
+Dobrodošli u **Minesweeper Pro**, naprednu verziju legendarne igre s RPG elementima, progresijom i posebnim modovima. Ispod su detaljni opisi svih mehanika.
 
-Dobrodošli u Minesweeper Pro, naprednu verziju legendarne igre s RPG elementima, progresijom i posebnim modovima. Ispod su detaljni opisi svih mehanika.
-
-1. MEHANIKA COINSA (VALUTA IGRE)
------------------------------------------
+### 1. Mehanika Coinsa (Valuta igre)
 Coins (novčići) u ovoj igri predstavljaju tvoje iskustvo i resurse.
-- Kako zaraditi: Svaki put kada uspješno očistiš minu ili pobijediš u partiji, dobivaš coinese. Sustav broji "Mines Cleared" (očišćene mine). Što je veća težina i što više polja otvoriš, to više zarađuješ.
-- Svrha: Coinsi se troše na "Crnom tržištu" (Shop) za kupnju perka koji ti pomažu u teškim situacijama.
-- Napomena: Gosti (Guest mode) ne mogu sakupljati coinese niti kupovati na marketplaceu.
+- **Kako zaraditi:** Svaki put kada uspješno očistiš minu ili pobijediš u partiji, dobivaš coinese. Sustav broji "Mines Cleared" (očišćene mine). Što je veća težina i što više polja otvoriš, to više zarađuješ.
+- **Svrha:** Coinsi se troše na "Crnom tržištu" (Shop) za kupnju perka koji ti pomažu u teškim situacijama.
+- **Napomena:** Gosti (Guest mode) ne mogu sakupljati coinese niti kupovati na marketplaceu.
 
-2. CRNO TRŽIŠTE (SHOP / PERKOVI)
------------------------------------------
+### 2. Crno Tržište (Shop / Perkovi)
 U meniju igre možeš pristupiti trgovini gdje kupuješ:
-- RADAR (Skeniranje): Nakon kupnje, tvoj sljedeći klik na bilo koje zatvoreno polje neće ga otvoriti, već će skeniranje 3x3 područje oko njega. Radar će otkriti gdje su mine i brojeve, ali će se polja nakon 2.5 sekunde ponovno sakriti. To ti omogućuje da planiraš unaprijed bez rizika.
-- DEFUSE KIT (Oklop): Ovo je pasivna zaštita. Ako slučajno klikneš na minu, oklop će je deaktivirati, pretvoriti to polje u sigurno polje (broj) i spasiti te od smrti. Oklop se troši nakon prve pogođene mine.
+- **RADAR (Skeniranje):** Nakon kupnje, tvoj sljedeći klik na bilo koje zatvoreno polje neće ga otvoriti, već će skenirati 3x3 područje oko njega. Radar će otkriti gdje su mine i brojeve, ali će se polja nakon 2.5 sekunde ponovno sakriti. To ti omogućuje da planiraš unaprijed bez rizika.
+- **DEFUSE KIT (Oklop):** Ovo je pasivna zaštita. Ako slučajno klikneš na minu, oklop će je deaktivirati, pretvoriti to polje u sigurno polje (broj) i spasiti te od smrti. Oklop se troši nakon prve pogođene mine.
 
-3. TRAINING MODE (TRENING)
------------------------------------------
+### 3. Training Mode (Trening)
 Ovo je klasično iskustvo Minesweepera, ali sa modernim dodacima.
-- Težine:
-  * Easy (Lagano): 6x6 mapa, 4 mine.
-  * Medium (Srednje): 10x10 mapa, 15 mina.
-  * Hard (Teško): 15x15 mapa, 45 mina.
-  * Impossible (Nemoguće): 20x20 mapa, 85 mina.
-  * Custom: Sam biraš veličinu (do 30x30) i broj mina.
-- Cilj: Otvoriti sva polja koja nisu mine.
+- **Težine:**
+  - **Easy:** 6x6 mapa, 4 mine.
+  - **Medium:** 10x10 mapa, 15 mina.
+  - **Hard:** 15x15 mapa, 45 mina.
+  - **Impossible:** 20x20 mapa, 85 mina.
+  - **Custom:** Sam biraš veličinu (do 30x30) i broj mina.
+- **Cilj:** Otvoriti sva polja koja nisu mine.
 
-4. CAREER MODE (KARIJERA)
------------------------------------------
+### 4. Career Mode (Karijera)
 Ovo je osnovni mod za progresiju.
-- Progresija: Počinješ od Nivoa 1. Svaka pobjeda te prebacuje na sljedeći nivo koji je progresivno teži (veća mapa, više mina).
-- Leaderboard: Tvoj napredak (Nivo i sakupljeni Coinsi) sprema se u bazu podataka i rangira te na globalnoj ljestvici.
-- Cilj: Dosegnuti što veći nivo i postati "Master Minesweeper".
+- **Progresija:** Počinješ od Nivoa 1. Svaka pobjeda te prebacuje na sljedeći nivo koji je progresivno teži (veća mapa, više mina).
+- **Leaderboard:** Tvoj napredak (Nivo i sakupljeni Coinsi) sprema se u bazu podataka i rangira te na globalnoj ljestvici.
+- **Cilj:** Dosegnuti što veći nivo i postati "Master Minesweeper".
 
-5. DNEVNI IZAZOV (DAILY CHALLENGE)
------------------------------------------
+### 5. Dnevni Izazov (Daily Challenge)
 - Svaki dan se generira ista mapa za sve igrače na svijetu (koristi se fiksni seed baziran na datumu).
 - Testiraj svoje vještine protiv ostatka zajednice na mapi koja je optimizirana za srednju težinu (15x15, 40 mina).
-- Cilj: Riješiti mapu što brže i bez greške.
+- **Cilj:** Riješiti mapu što brže i bez greške.
 
-6. MINI GAMES (MINI IGRE)
------------------------------------------
+### 6. Mini Games (Mini Igre)
 
-A) MINE DASH (Trka kroz mine)
-- Mehanika: Igra je fokusirana na brzinu (Time Attack). Imaš horizontalnu stazu od 10 polja. U svakom stupcu postoji samo jedno sigurno polje, ostalo su mine.
-- Cilj: Što brže kliknuti na siguran put s lijeva na desno. Svaki točan klik dodaje +2 sekunde na tajmer. Ako stigneš do kraja prije isteka vremena, pobjeđuješ.
+#### A) MINE DASH (Trka kroz mine)
+- **Mehanika:** Igra je fokusirana na brzinu (Time Attack). Imaš horizontalnu stazu od 10 polja. U svakom stupcu postoji samo jedno sigurno polje, ostalo su mine.
+- **Cilj:** Što brže kliknuti na siguran put s lijeva na desno. Svaki točan klik dodaje +2 sekunde na tajmer.
 
-B) TREASURE HUNTER (Memorijski izazov)
-- Mehanika: Na samom početku igre, na 2 sekunde će se prikazati sve mine na mapi, a nakon toga će nestati i polja će postati prazna.
-- Cilj: Moraš zapamtiti gdje su bile mine i kliknuti na sva OSTALA polja. Ako pogodiš mjesto gdje je bila mina (koju si vidio na početku), gubiš. Ovo testira tvoju vizualnu memoriju.
+#### B) TREASURE HUNTER (Memorijski izazov)
+- **Mehanika:** Na samom početku igre, na 2 sekunde će se prikazati sve mine na mapi, a nakon toga će nestati i polja će postati prazna.
+- **Cilj:** Moraš zapamtiti gdje su bile mine i kliknuti na sva OSTALA polja.
 
-C) CHAIN REACTION (Puzzle / Logika)
-- Mehanika: Dobivaš mapu koja je već djelomično riješena, ali imaš ograničen broj "Energije" (zastavica).
-- Cilj: Umjesto otvaranja polja, ovdje je fokus na označavanju mina zastavicama (desni klik ili long press). Svaka pogrešno postavljena zastavica na sigurno polje troši tvoju energiju. Moraš označiti točno onoliko mina koliko piše na HUD-u da bi pobijedio.
+#### C) CHAIN REACTION (Puzzle / Logika)
+- **Mehanika:** Dobivaš mapu koja je već djelomično riješena, ali imaš ograničen broj "Energije" (zastavica).
+- **Cilj:** Umjesto otvaranja polja, ovdje je fokus na označavanju mina zastavicama. Moraš označiti točno onoliko mina koliko piše na HUD-u.
 
-7. KAKO IGRATI I CILJEVI (SAŽETAK)
------------------------------------------
+### 7. Kako igrati i ciljevi (Sažetak)
 
 | Mod | Kontrole | Cilj |
 | :--- | :--- | :--- |
@@ -128,7 +116,7 @@ C) CHAIN REACTION (Puzzle / Logika)
 | **Treasure Hunter** | Lijevi klik (po pamćenju) | Otvoriti sva polja koja NISU bila prikazana kao mine. |
 | **Chain Reaction** | Desni klik (Zastavica) | Pravilno označiti sve mine s ograničenom energijom. |
 
-OSNOVNO PRAVILO: Brojevi ti govore koliko se mina nalazi u 8 susjednih polja. Koristi logiku, planiraj poteze i postani najbolji agent na terenu!
+**OSNOVNO PRAVILO:** Brojevi ti govore koliko se mina nalazi u 8 susjednih polja. Koristi logiku, planiraj poteze i postani najbolji agent na terenu!
 
 ---
 
@@ -150,4 +138,3 @@ Igra koristi:
 
 _Izrađeno s ljubavlju prema retro igrama i modernom web dizajnu._
 
-```
