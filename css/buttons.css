@@ -1,4 +1,9 @@
 /* --- GUMBI (BUTTONS) --- */
+/* 
+   MINESWEEPER PRO+ - BUTTON STYLES
+   Definicija svih stilova za gumbe u igri: od glavnog izbornika,
+   HUD kontrola, do specijalnih gumba za kupnju i potvrdu akcija.
+*/
 
 .menu-buttons {
     display: flex;

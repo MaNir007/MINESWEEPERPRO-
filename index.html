@@ -1,3 +1,6 @@
+<!--MINESWEEPER PRO+ - MAIN GAME INTERFACE
+   Glavna HTML struktura igre. Sadrži navigaciju, HUD, board, menije i modale. -->
+
 <!DOCTYPE html>
 <html lang="hr">
 <head>
@@ -10,6 +13,7 @@
     <link rel="stylesheet" href="css/game.css?v=3.0">
     <link rel="stylesheet" href="css/animations.css?v=3.0">
     <link rel="stylesheet" href="css/themes.css?v=3.0">
+    <link rel="stylesheet" href="css/friv.css?v=3.0">
     <link rel="icon" type="image/svg+xml" href="svg/icons/ikona.svg">
 </head>
 <body oncontextmenu="return false;">
@@ -31,6 +35,10 @@
                 <button class="btn" onclick="playAsGuest()">IGRAJ KAO GOST</button>
             </div>
         </section>
+
+        <button class="btn-theme-picker" onclick="openThemeModal()" title="Promijeni temu dizajna">
+            <span data-svg="brush" data-width="24" data-height="24"></span>
+        </button>
 
         <section id="menu" class="card hidden">
             <div class="profile-summary">
@@ -64,21 +72,41 @@
                 </div>
             </div>
 
-            <div class="menu-buttons">
-                <button class="btn btn-primary" onclick="startGame('Training')">POKRENI TRENING</button>
-                <button class="btn" onclick="startGame('Career')">ZAPOČNI KARIJERU</button>
-            </div>
-            
-            <div class="mini-games-section section-divider">
-                <h3 class="section-title">SPESIJALNE OPERACIJE</h3>
-                <div class="menu-buttons">
-                    <button class="btn btn-primary btn-daily" onclick="startGame('Daily')">
-                        <span data-svg="target" data-width="18" data-height="18" data-class="svg-target"></span>
-                        DNEVNI IZAZOV
-                    </button>
-                    <button class="btn" onclick="startGame('MineDash')">MINE DASH (SPEED)</button>
-                    <button class="btn" onclick="startGame('TreasureHunter')">TREASURE HUNTER (MEMORIJA)</button>
-                    <button class="btn" onclick="startGame('ChainReaction')">CHAIN REACTION (PUZZLE)</button>
+            <div class="friv-grid-container section-divider">
+                <h3 class="section-title">ODABERI IGRU</h3>
+                <div class="friv-grid">
+                    <div class="friv-tile career" onclick="startGame('Career')">
+                        <span data-svg="trophy" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Karijera</span>
+                    </div>
+                    <div class="friv-tile training" onclick="startGame('Training')">
+                        <span data-svg="target" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Trening</span>
+                    </div>
+                    <div class="friv-tile daily" onclick="startGame('Daily')">
+                        <span data-svg="bell" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Dnevni<br>Izazov</span>
+                    </div>
+                    <div class="friv-tile minedash" onclick="startGame('MineDash')">
+                        <span data-svg="stopwatch" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Mine Dash</span>
+                    </div>
+                    <div class="friv-tile treasure" onclick="startGame('TreasureHunter')">
+                        <span data-svg="coin" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Treasure</span>
+                    </div>
+                    <div class="friv-tile chain" onclick="startGame('ChainReaction')">
+                        <span data-svg="explosion" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Chain React</span>
+                    </div>
+                    <div class="friv-tile zen" onclick="startGame('ZenMode')">
+                        <span data-svg="check" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Zen Vrt</span>
+                    </div>
+                    <div class="friv-tile fog" onclick="startGame('Fog')">
+                        <span data-svg="flag" data-width="36" data-height="36" class="tile-icon"></span>
+                        <span class="tile-title">Magla</span>
+                    </div>
                 </div>
             </div>
             <div id="shop-section" class="section-divider">
@@ -125,6 +153,10 @@
                         <span id="mine-val" class="value">0</span>
                     </div>
                     <div class="stat">
+                        <span class="label">APM</span>
+                        <span id="apm-val" class="value">0</span>
+                    </div>
+                    <div class="stat">
                         <span class="label">TIME</span>
                         <span id="timer-val" class="value">00:00</span>
                     </div>
@@ -166,15 +198,49 @@
         </div>
     </div>
 
+    <!-- Modal za Theme Picker -->
+    <div id="theme-modal" class="overlay hidden">
+        <div class="overlay-content card" style="max-width: 400px;">
+            <h2>DIZAJN TERMInALA</h2>
+            <p>Odaberi vizualni stil svog sustava:</p>
+            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0;">
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('classic')">Classic</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('cyberpunk')">Cyberpunk</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('matrix')">Matrix</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('retro')">Retro Win95</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('neon')">Neon</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('summer')">Ljeto</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('spring')">Proljeće</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('ocean')">Ocean</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('mars')">Mars</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('midnight')">Midnight</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('nature')">Nature</button>
+                <button class="btn btn-small btn-secondary" onclick="setUserTheme('sunset')">Sunset</button>
+            </div>
+            <button class="btn btn-primary" onclick="closeThemeModal()">ZATVORI</button>
+        </div>
+    <!-- Modal za potvrdu (Confirm) -->
+    <div id="confirm-modal" class="overlay hidden">
+        <div class="overlay-content card pulse-anim" style="max-width: 350px;">
+            <div id="confirm-icon" style="margin-bottom: 15px;"></div>
+            <h2 id="confirm-title">POTVRDI AKCIJU</h2>
+            <p id="confirm-msg" style="margin: 15px 0;"></p>
+            <div class="perk-actions">
+                <button id="confirm-cancel-btn" class="btn btn-secondary">ODUSTANI</button>
+                <button id="confirm-ok-btn" class="btn btn-primary">POTVRDI</button>
+            </div>
+        </div>
+    </div>
+
     <div id="notification-container"></div>
     
-    <script src="js/notifier.js?v=3.0"></script>
-    <script src="js/svg-loader.js?v=3.0"></script>
-    <script src="js/globals.js?v=3.0"></script>
-    <script src="js/api.js?v=3.0"></script>
-    <script src="js/ui.js?v=3.0"></script>
-    <script src="js/timer.js?v=3.0"></script>
-    <script src="js/game.js?v=3.0"></script>
-    <script src="js/cheats.js?v=3.0"></script>
+    <script src="js/notifier.js?v=3.5"></script>
+    <script src="js/svg-loader.js?v=3.5"></script>
+    <script src="js/globals.js?v=3.5"></script>
+    <script src="js/api.js?v=3.5"></script>
+    <script src="js/ui.js?v=3.5"></script>
+    <script src="js/timer.js?v=3.5"></script>
+    <script src="js/game.js?v=3.5"></script>
+    <script src="js/cheats.js?v=3.5"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /**
  * --- MINESWEEPER PRO+ NOTIFICATION SYSTEM ---
- * Zamjenjuje klasične browser alert() poruke sa stiliziranim "pushup" obavijestima.
+ * Zamjenjuje klasične browser alert() i confirm() poruke sa stiliziranim "pushup" obavijestima i modalima.
  */
 
 const Notifier = {
@@ -9,18 +9,21 @@ const Notifier = {
     init() {
         this.container = document.getElementById('notification-container');
         
-        // OPCIONALNO: Preusmjeri standardni alert na naš sustav
+        // Preusmjeri standardni alert na naš sustav
         window.alert = (msg) => this.show(msg, 'info');
-        console.log("Custom Notifikacije aktivne.");
+        
+        console.log("Custom Notifikacije i Confirm sustav aktivni.");
     },
 
+    /**
+     * Prikazuje push-up obavijest (toast).
+     */
     show(message, type = 'info', duration = 4000) {
         if (!this.container) this.init();
 
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
         
-        // Odaberi ikonu ovisno o tipu
         let icon = Icons.bell.replace('<svg', '<svg width="20" height="20"');
         if (type === 'success') icon = Icons.check.replace('<svg', '<svg width="20" height="20"');
         if (type === 'error') icon = Icons.wrong.replace('<svg', '<svg width="20" height="20"');
@@ -31,15 +34,42 @@ const Notifier = {
             <div class="toast-message">${message}</div>
         `;
 
-        // Klik za zatvaranje
         toast.onclick = () => this.remove(toast);
-
         this.container.appendChild(toast);
 
-        // Automatsko uklanjanje
-        setTimeout(() => {
-            this.remove(toast);
-        }, duration);
+        setTimeout(() => this.remove(toast), duration);
+    },
+
+    /**
+     * Prikazuje custom prozor za potvrdu akcije.
+     * Budući da je browserov confirm() sinkron, a ovo asinkron, koristi se callback/Promise.
+     */
+    confirm(message, onConfirm, title = "POTVRDI AKCIJU") {
+        const modal = document.getElementById('confirm-modal');
+        const msgEl = document.getElementById('confirm-msg');
+        const titleEl = document.getElementById('confirm-title');
+        const okBtn = document.getElementById('confirm-ok-btn');
+        const cancelBtn = document.getElementById('confirm-cancel-btn');
+        const iconEl = document.getElementById('confirm-icon');
+
+        if (!modal) return;
+
+        msgEl.innerText = message;
+        titleEl.innerText = title;
+        if (iconEl && window.Icons) iconEl.innerHTML = Icons.target.replace('<svg', '<svg width="48" height="48"');
+
+        modal.classList.remove('hidden');
+
+        const close = () => modal.classList.add('hidden');
+
+        okBtn.onclick = () => {
+            close();
+            if (onConfirm) onConfirm();
+        };
+
+        cancelBtn.onclick = () => {
+            close();
+        };
     },
 
     remove(toast) {
@@ -57,5 +87,4 @@ const Notifier = {
     info(msg) { this.show(msg, 'info'); }
 };
 
-// Inicijalizacija pri učitavanju
 document.addEventListener('DOMContentLoaded', () => Notifier.init());

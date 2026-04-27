@@ -1,57 +1,166 @@
-/* MATRIX THEME (Level 10+) */
-body.theme-matrix {
-    background: #000 !important;
-    font-family: monospace, sans-serif !important;
-}
-body.theme-matrix * {
-    font-family: monospace, sans-serif !important;
-}
-body.theme-matrix .card {
-    background: rgba(0, 20, 0, 0.8) !important;
-    border-color: #0f0 !important;
-    box-shadow: 0 0 20px rgba(0,255,0,0.3) !important;
-}
-body.theme-matrix .btn { border-color: #0f0; color: #0f0; background: transparent; }
-body.theme-matrix .btn:hover { background: rgba(0,255,0,0.2); box-shadow: 0 0 10px #0f0; }
-body.theme-matrix .btn-primary { background: #050; border: 1px solid #0f0; }
-body.theme-matrix .cell.open { background: #000; border: 1px solid #0f0; color: #0f0; text-shadow: 0 0 5px #0f0; }
-body.theme-matrix .cell { border: 1px solid rgba(0,255,0,0.2); background: rgba(0,50,0,0.3); }
+/* 
+   MINESWEEPER PRO+ - ULTIMATE THEME DEFINITIONS
+   Sada s unikatnim dizajnima za GAME MODEOVE (pločice) unutar svake teme.
+*/
 
-/* CYBERPUNK THEME (Level 5+) */
-body.theme-cyberpunk {
-    background: linear-gradient(135deg, #09001b 0%, #20002c 100%) !important;
-}
-body.theme-cyberpunk .card {
-    background: rgba(255, 0, 128, 0.1) !important;
-    border-color: #fcee0a !important;
-    border-right: 4px solid #00fff9 !important;
-    border-bottom: 4px solid #fcee0a !important;
-}
-body.theme-cyberpunk .btn { border-color: #00fff9; color: #00fff9; border-radius: 0; text-transform: uppercase; }
-body.theme-cyberpunk .btn-primary { background: #ff007f; color: #fff; border: 2px solid #fcee0a; }
-body.theme-cyberpunk .cell.open { background: #111; color: #00fff9; border: 1px solid #ff007f; }
-body.theme-cyberpunk .cell { background: rgba(252, 238, 10, 0.2); border-radius: 0; }
+/* =========================================
+   1. MATRIX - Digital Grid
+   ========================================= */
+body.theme-matrix { background: #000 !important; background-image: linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px) !important; background-size: 20px 20px !important; }
+body.theme-matrix .card { background: rgba(0, 10, 0, 0.95) !important; border: 1px solid #0f0 !important; box-shadow: 0 0 30px #0f04 !important; }
+body.theme-matrix .cell { background: #010 !important; border: 1px solid #0f05 !important; }
+body.theme-matrix .cell.open { background: #000 !important; color: #0f0 !important; box-shadow: inset 0 0 5px #0f0; }
 
-/* RETRO WIN95 THEME (Level 15+) */
-body.theme-retro {
-    background: #008080 !important;
-    font-family: "MS Sans Serif", Arial, sans-serif !important;
-}
-body.theme-retro .card {
-    background: #c0c0c0 !important;
-    border: none !important;
-    border-top: 2px solid #fff !important;
-    border-left: 2px solid #fff !important;
-    border-bottom: 2px solid #000 !important;
-    border-right: 2px solid #000 !important;
-    border-radius: 0 !important;
-    color: #000 !important;
-}
-body.theme-retro .btn {
-    background: #c0c0c0; border: none; border-top: 2px solid #fff; border-left: 2px solid #fff; border-bottom: 2px solid #000; border-right: 2px solid #000;
-    color: #000; border-radius: 0;
-}
-body.theme-retro .btn:active { border-top: 2px solid #000; border-left: 2px solid #000; border-bottom: 2px solid #fff; border-right: 2px solid #fff; }
-body.theme-retro .cell { background: #c0c0c0; border-top: 2px solid #fff; border-left: 2px solid #fff; border-right: 2px solid #808080; border-bottom: 2px solid #808080; border-radius: 0; }
-body.theme-retro .cell.open { background: #c0c0c0; border: 1px solid #808080; }
-body.theme-retro * { text-shadow: none !important; }
+/* Matrix specifične pločice - Zeleni spektar */
+body.theme-matrix .friv-tile { border-radius: 0 !important; border-color: #0f0 !important; }
+body.theme-matrix .friv-tile.career { background: #003300 !important; }
+body.theme-matrix .friv-tile.training { background: #004400 !important; }
+body.theme-matrix .friv-tile.daily { background: #005500 !important; }
+body.theme-matrix .friv-tile.minedash { background: #002200 !important; }
+body.theme-matrix .friv-tile.treasure { background: #006600 !important; }
+body.theme-matrix .friv-tile.chain { background: #224400 !important; }
+body.theme-matrix .friv-tile.zen { background: #001100 !important; }
+body.theme-matrix .friv-tile.fog { background: #000 !important; }
+
+/* =========================================
+   2. CYBERPUNK - Night City
+   ========================================= */
+body.theme-cyberpunk { background: #0d0221 !important; background-image: radial-gradient(circle at 50% 50%, #2f0449 0%, #0d0221 100%) !important; }
+body.theme-cyberpunk .card { background: rgba(13, 2, 33, 0.8) !important; border: 2px solid #00fff9 !important; box-shadow: -5px -5px 0 #ff007f, 5px 5px 0 #00fff9 !important; }
+body.theme-cyberpunk .cell { background: #ff007f !important; border-radius: 0; }
+body.theme-cyberpunk .cell.open { background: #0d0221 !important; color: #fcee0a !important; border: 1px solid #00fff9; }
+
+/* Cyberpunk specifične pločice - Neon spektar */
+body.theme-cyberpunk .friv-tile { border-radius: 0 !important; border-width: 4px !important; }
+body.theme-cyberpunk .friv-tile.career { background: #ff007f !important; box-shadow: 4px 4px 0 #00fff9 !important; }
+body.theme-cyberpunk .friv-tile.training { background: #00fff9 !important; box-shadow: 4px 4px 0 #ff007f !important; color: #000; }
+body.theme-cyberpunk .friv-tile.daily { background: #fcee0a !important; box-shadow: 4px 4px 0 #000 !important; color: #000; }
+body.theme-cyberpunk .friv-tile.minedash { background: #bc00ff !important; box-shadow: 4px 4px 0 #00fff9 !important; }
+body.theme-cyberpunk .friv-tile.treasure { background: #00ff00 !important; box-shadow: 4px 4px 0 #000 !important; color: #000; }
+body.theme-cyberpunk .friv-tile.chain { background: #ff4e00 !important; }
+body.theme-cyberpunk .friv-tile.zen { background: #000 !important; border-color: #00fff9 !important; }
+body.theme-cyberpunk .friv-tile.fog { background: #333 !important; }
+
+/* =========================================
+   3. RETRO (Win95) - Blue Taskbar Edition
+   ========================================= */
+body.theme-retro { background: #57a1a1 !important; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAS0lEQVRYR+2X0Q0AIAzC2v2Xlo3YwF80GvOAXCCX5AUEvK7IOnA6p99QOic+9LqC7v/XW+Nf8fsh+UuALv9S7l8O6Pw9uX/POf2qcl8O7vU76gB+N6EAAAAASUVORK5CYII=') !important; }
+body.theme-retro .card { background: #c0c0c0 !important; border: 2px solid !important; border-top-color: #fff !important; border-left-color: #fff !important; border-right-color: #808080 !important; border-bottom-color: #808080 !important; box-shadow: 1px 1px 0 #000, -1px -1px 0 #dfdfdf !important; border-radius: 0 !important; }
+body.theme-retro .cell { background: #c0c0c0 !important; border: 2px solid !important; border-top-color: #fff !important; border-left-color: #fff !important; border-right-color: #808080 !important; border-bottom-color: #808080 !important; border-radius: 0; }
+
+/* Retro specifične pločice - Win95 System Colors */
+body.theme-retro .friv-tile { border-radius: 0 !important; border: 2px solid !important; border-top-color: #fff !important; border-left-color: #fff !important; color: #000 !important; }
+body.theme-retro .friv-tile.career { background: #000080 !important; color: #fff !important; }
+body.theme-retro .friv-tile.training { background: #008000 !important; color: #fff !important; }
+body.theme-retro .friv-tile.daily { background: #800000 !important; color: #fff !important; }
+body.theme-retro .friv-tile.minedash { background: #800080 !important; color: #fff !important; }
+body.theme-retro .friv-tile.treasure { background: #808000 !important; }
+body.theme-retro .friv-tile.chain { background: #ff4500 !important; }
+body.theme-retro .friv-tile.zen { background: #c0c0c0 !important; }
+body.theme-retro .friv-tile.fog { background: #808080 !important; }
+
+/* =========================================
+   4. OCEAN - Shallow Reef
+   ========================================= */
+body.theme-ocean { background: #3a7bd5 !important; background-image: linear-gradient(180deg, #3a7bd5 0%, #00d2ff 100%) !important; }
+body.theme-ocean .card { background: rgba(255, 255, 255, 0.2) !important; backdrop-filter: blur(15px) !important; border-radius: 30px !important; border: 2px solid rgba(255, 255, 255, 0.4) !important; }
+
+/* Ocean specifične pločice - Vodeni spektar */
+body.theme-ocean .friv-tile { border-radius: 20px 20px 60% 60% !important; border: 2px solid rgba(255,255,255,0.5) !important; }
+body.theme-ocean .friv-tile.career { background: #004e92 !important; }
+body.theme-ocean .friv-tile.training { background: #00c6ff !important; }
+body.theme-ocean .friv-tile.daily { background: #ff512f !important; }
+body.theme-ocean .friv-tile.minedash { background: #74ebd5 !important; }
+body.theme-ocean .friv-tile.treasure { background: #8e44ad !important; }
+body.theme-ocean .friv-tile.chain { background: #e67e22 !important; }
+body.theme-ocean .friv-tile.zen { background: #2ecc71 !important; }
+body.theme-ocean .friv-tile.fog { background: #2c3e50 !important; }
+
+/* =========================================
+   5. MARS - Orbital View
+   ========================================= */
+body.theme-mars { background: #451b0d !important; background-image: radial-gradient(circle at top, #fc4a1a, #451b0d) !important; }
+body.theme-mars .card { background: rgba(20, 10, 5, 0.9) !important; border: 2px solid #fc4a1a !important; }
+
+/* Mars specifične pločice - Rusty spektar */
+body.theme-mars .friv-tile { border-radius: 12px 12px 0 0 !important; border: 2px solid #5d1a04 !important; }
+body.theme-mars .friv-tile.career { background: #8e2e00 !important; }
+body.theme-mars .friv-tile.training { background: #b04e21 !important; }
+body.theme-mars .friv-tile.daily { background: #ed213a !important; }
+body.theme-mars .friv-tile.minedash { background: #451b0d !important; }
+body.theme-mars .friv-tile.treasure { background: #f39c12 !important; }
+body.theme-mars .friv-tile.chain { background: #d35400 !important; }
+body.theme-mars .friv-tile.zen { background: #27ae60 !important; }
+body.theme-mars .friv-tile.fog { background: #190a05 !important; }
+
+/* =========================================
+   6. NATURE - Forest Floor
+   ========================================= */
+body.theme-nature { background: #2d5a27 !important; background-image: linear-gradient(135deg, #1e352f, #2d5a27) !important; }
+body.theme-nature .card { background: #fdf5e6 !important; border: 10px solid #8b4513 !important; border-radius: 12px !important; }
+
+/* Nature specifične pločice - Organski spektar */
+body.theme-nature .friv-tile { border-radius: 50% 50% 10% 50% !important; border: 4px solid #fff !important; }
+body.theme-nature .friv-tile.career { background: #1b5e20 !important; }
+body.theme-nature .friv-tile.training { background: #4caf50 !important; }
+body.theme-nature .friv-tile.daily { background: #e91e63 !important; }
+body.theme-nature .friv-tile.minedash { background: #3f51b5 !important; }
+body.theme-nature .friv-tile.treasure { background: #ffeb3b !important; color: #000; }
+body.theme-nature .friv-tile.chain { background: #ff9800 !important; }
+body.theme-nature .friv-tile.zen { background: #8bc34a !important; }
+body.theme-nature .friv-tile.fog { background: #263238 !important; }
+
+/* =========================================
+   7. MIDNIGHT - Black Hole
+   ========================================= */
+body.theme-midnight { background: #000 !important; }
+body.theme-midnight .card { background: #050505 !important; border: 1px solid #222 !important; }
+
+/* Midnight specifične pločice - Dark spektar */
+body.theme-midnight .friv-tile { border-radius: 15px !important; border: 1px solid #222 !important; filter: brightness(0.8); }
+body.theme-midnight .friv-tile.career { background: #111 !important; border-color: #ffeb3b !important; }
+body.theme-midnight .friv-tile.training { background: #111 !important; border-color: #00c6ff !important; }
+body.theme-midnight .friv-tile.daily { background: #111 !important; border-color: #ff4b2b !important; }
+body.theme-midnight .friv-tile.minedash { background: #111 !important; border-color: #bc00ff !important; }
+body.theme-midnight .friv-tile.treasure { background: #111 !important; border-color: #11998e !important; }
+body.theme-midnight .friv-tile.chain { background: #111 !important; border-color: #f12711 !important; }
+body.theme-midnight .friv-tile.zen { background: #111 !important; border-color: #56ab2f !important; }
+body.theme-midnight .friv-tile.fog { background: #000 !important; border-color: #444 !important; }
+
+/* =========================================
+   8. SUNSET - Evening Sky
+   ========================================= */
+body.theme-sunset { background: #ee0979 !important; background-image: linear-gradient(0deg, #ee0979, #ff6a00) !important; }
+
+/* Sunset specifične pločice - Warm spektar */
+body.theme-sunset .friv-tile { border-radius: 5px 40px 5px 40px !important; border: 2px solid white !important; }
+body.theme-sunset .friv-tile.career { background: #4f005d !important; }
+body.theme-sunset .friv-tile.training { background: #003973 !important; }
+body.theme-sunset .friv-tile.daily { background: #d31027 !important; }
+body.theme-sunset .friv-tile.minedash { background: #2c3e50 !important; }
+body.theme-sunset .friv-tile.treasure { background: #11998e !important; }
+body.theme-sunset .friv-tile.chain { background: #f09819 !important; }
+body.theme-sunset .friv-tile.zen { background: #1d976c !important; }
+body.theme-sunset .friv-tile.fog { background: #3d3d3d !important; }
+
+/* =========================================
+   9. NEON - Electric Violet
+   ========================================= */
+body.theme-neon { background: #11001c !important; }
+body.theme-neon .friv-tile { border: 2px solid #00f5ff !important; box-shadow: 0 0 10px rgba(0,245,255,0.3) !important; }
+body.theme-neon .friv-tile.career { background: #ff00ff !important; box-shadow: 0 0 15px #ff00ff !important; }
+body.theme-neon .friv-tile.training { background: #00f5ff !important; color: #000 !important; }
+body.theme-neon .friv-tile.daily { background: #ff4b2b !important; }
+body.theme-neon .friv-tile.minedash { background: #bc00ff !important; }
+
+/* =========================================
+   10. SUMMER - Bright Beach
+   ========================================= */
+body.theme-summer { background: #f5f5f5 !important; background-image: radial-gradient(#4facfe 20%, transparent 20%) !important; background-size: 40px 40px !important;}
+body.theme-summer .friv-tile { border-radius: 50% !important; border-width: 4px !important; }
+
+/* =========================================
+   11. SPRING - Meadow
+   ========================================= */
+body.theme-spring { background: #76b852 !important; }
+body.theme-spring .friv-tile { border-radius: 80% 20% !important; border: 3px solid #fff !important; }

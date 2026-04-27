@@ -1,116 +1,153 @@
-// --- AUTH & API LOGIKA ---
-async function login() {
-    const nameInput = document.getElementById("username-input");
-    const name = nameInput.value.trim();
+/**
+ * MINESWEEPER PRO+ - NETWORK API CLIENT
+ * 
+ * Ovaj file upravlja AJAX komunikacijom sa backend serverom (api.php).
+ * Služi za autentifikaciju, spremanje progresa i kupnju predmeta u trgovini.
+ */
+
+/**
+ * Glavni ulaz za prijavu iz HTML-a. Dohvaća podatke iz input polja.
+ */
+window.login = async function() {
+    const user = document.getElementById("username-input").value;
+    if (!user) {
+        if(window.Notifier) Notifier.error("Unesite ime agenta.");
+        else alert("Unesite ime agenta.");
+        return;
+    }
     
-    if (name.length < 3) return Notifier.error("Agent: Identitet prekratak (min. 3 znaka)!");
-
-    const formData = new FormData();
-    formData.append("username", name);
-
     try {
-        const response = await fetch("api.php?action=login", {
-            method: "POST",
-            body: formData
+        const response = await fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `action=login&username=${encodeURIComponent(user)}`
         });
         const data = await response.json();
         
-        if (data.status === "success" || data.status === "created") {
-            currentUser = name;
+        if (data.status === 'success') {
+            currentUser = user;
+            playerCoins = parseInt(data.coins);
+            level = parseInt(data.level);
             isGuest = false;
-            level = parseInt(data.level) || 1;
-            playerCoins = parseInt(data.coins) || 0;
-            showMenu();
+            if(window.showMenu) showMenu();
+        } else {
+            if(window.Notifier) Notifier.error("Greška: " + data.message);
+            else alert("Greška: " + data.message);
         }
-    } catch (error) {
-        console.warn("Fallback na LocalStorage");
-        currentUser = name;
-        isGuest = false;
-        level = parseInt(localStorage.getItem(`ms_pro_level_${currentUser}`)) || 1;
-        showMenu();
+    } catch (e) {
+        console.error("Mrežna greška:", e);
     }
-}
+};
 
-function playAsGuest() {
+/**
+ * Ulazna funkcija za igranje kao gost.
+ */
+window.playAsGuest = function() {
     currentUser = "Gost";
-    isGuest = true;
+    playerCoins = 0;
     level = 1;
-    showMenu();
-}
+    isGuest = true;
+    if(window.showMenu) showMenu();
+};
 
-async function saveProgress(newLvl, won = false, minesCleared = 0) {
+/**
+ * Šalje informaciju o pobjedi/porazu na server.
+ * @param {number} newLevel - Novi dosegnuti nivo
+ * @param {boolean} isWin - Rezultat partije
+ * @param {number} score - Broj bodova/mina
+ */
+window.saveProgress = async function(newLevel, isWin, score) {
     if (isGuest) return;
     
-    const formData = new FormData();
-    formData.append("username", currentUser);
-    formData.append("level", newLvl);
-    formData.append("won", won ? 1 : 0);
-    formData.append("mines_cleared", minesCleared);
-
     try {
-        await fetch("api.php?action=save", { method: "POST", body: formData });
-        localStorage.setItem(`ms_pro_level_${currentUser}`, newLvl);
-    } catch (e) { console.error("API Save Error"); }
-}
-
-async function fetchLeaderboard() {
-    try {
-        const response = await fetch("api.php?action=leaderboard");
+        const response = await fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `action=save_progress&username=${encodeURIComponent(currentUser)}&level=${newLevel}&is_win=${isWin ? 1 : 0}&score=${score}`
+        });
         const data = await response.json();
-        
+        if (data.status === 'success') {
+            playerCoins = parseInt(data.coins);
+            const coinsEl = document.getElementById("coins-display");
+            if(coinsEl) coinsEl.innerText = playerCoins;
+        }
+    } catch (e) {
+        console.error("Spremanje nije uspjelo:", e);
+    }
+};
+
+/**
+ * Obrađuje transakciju kupnje u trgovini.
+ * @param {string} type - 'radar' ili 'defuse'
+ * @param {number} cost - Cijena predmeta
+ */
+window.buyPerk = async function(type, cost) {
+    if (playerCoins < cost) {
+        if(window.Notifier) Notifier.warning("NEDOVOLJNO COINSA!");
+        return;
+    }
+    
+    if (isGuest) {
+        playerCoins -= cost;
+        const coinsEl = document.getElementById("coins-display");
+        if(coinsEl) coinsEl.innerText = playerCoins;
+        activatePerk(type);
+        return;
+    }
+
+    try {
+        const response = await fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `action=buy_perk&username=${encodeURIComponent(currentUser)}&type=${type}&cost=${cost}`
+        });
+        const data = await response.json();
+        if (data.status === 'success') {
+            playerCoins = parseInt(data.coins);
+            const coinsEl = document.getElementById("coins-display");
+            if(coinsEl) coinsEl.innerText = playerCoins;
+            activatePerk(type);
+        } else {
+            if(window.Notifier) Notifier.error("TRANSAKCIJA ODBIJENA!");
+        }
+    } catch (e) {
+        console.error("Greška pri kupnji:", e);
+    }
+};
+
+/**
+ * Aktivira kupljeni predmet.
+ * @param {string} type - Vrsta aktiviranog perka
+ */
+window.activatePerk = function(type) {
+    if (type === 'radar') {
+        radarActive = true;
+        document.body.classList.add("cursor-target");
+        if(window.Notifier) Notifier.success("RADAR AKTIVAN - ODABERI CILJ");
+    } else {
+        hasDefuseKit = true;
+        if(window.Notifier) Notifier.success("OKLOP OPREMLJEN!");
+    }
+};
+
+/**
+ * Dohvaća top listu igrača sa servera.
+ */
+window.fetchLeaderboard = async function() {
+    try {
+        const response = await fetch('api.php?action=leaderboard');
+        const data = await response.json();
         const list = document.getElementById("leaderboard-list");
-        list.innerHTML = "";
+        if (!list) return;
         
-        if (data.status === "success" && data.leaderboard && data.leaderboard.length > 0) {
-            data.leaderboard.forEach((player, index) => {
-                const li = document.createElement("li");
-                li.className = "leaderboard-item";
-                
-                let color = "white";
-                if (index === 0) color = "#ffeb3b"; // Gold
-                else if (index === 1) color = "#e0e0e0"; // Silver
-                else if (index === 2) color = "#cd7f32"; // Bronze
-                
-                let hs = player.high_score_mines ? ` | HS: ${player.high_score_mines}💣` : '';
-                li.innerHTML = `<span style="color:${color}"><b>${index + 1}.</b> ${player.username}</span> 
-                                <span style="color:var(--primary)">Lvl: ${player.level} <span style="font-size:0.7em; color:var(--mine);">${hs}</span></span>`;
-                list.appendChild(li);
-            });
-        } else {
-            list.innerHTML = `<li class="leaderboard-empty">Nema podataka</li>`;
-        }
+        list.innerHTML = "";
+        data.forEach((entry, i) => {
+            const div = document.createElement("div");
+            div.className = "leaderboard-item";
+            div.innerHTML = `<span>#${i+1} ${entry.username}</span><span>LVL ${entry.level}</span>`;
+            list.appendChild(div);
+        });
     } catch (e) {
-        document.getElementById("leaderboard-list").innerHTML = `<li class="leaderboard-empty">Greška pri učitavanju</li>`;
+        console.error("Leaderboard nedostupan.");
     }
-}
-
-async function buyPerk(type, cost) {
-    if (isGuest) { alert("Gosti nemaju pristup Crnom tržištu."); return; }
-    if (playerCoins < cost) { alert("Nemaš dovoljno novčića (mina)!"); return; }
-    
-    const fd = new FormData();
-    fd.append("username", currentUser);
-    fd.append("cost", cost);
-    
-    try {
-        const response = await fetch("api.php?action=buy", { method: "POST", body: fd });
-        const data = await response.json();
-        if (data.status === "success") {
-            playerCoins = data.new_balance;
-            document.getElementById("coins-display").innerText = playerCoins;
-            
-            if (type === 'radar') {
-                radarActive = true;
-                document.body.classList.add("cursor-target");
-                alert("Radar je napunjen! Sljedeći klik na polje vrši skeniranje 3x3 perimetra.");
-            } else if (type === 'defuse') {
-                hasDefuseKit = true;
-                alert("Oklop aktiviran! Prvi krivi korak na minu je zaštićen.");
-            }
-        } else {
-            alert(data.message);
-        }
-    } catch (e) {
-        console.error("Greška kupnje", e);
-    }
-}
+};

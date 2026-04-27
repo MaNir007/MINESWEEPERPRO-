@@ -1,0 +1,157 @@
+/* 
+   MINESWEEPER PRO+ - FRIV HUB STYLES
+   Stilovi za 3D interaktivne pločice (Tiles) na glavnom izborniku.
+   Upravlja gradijentima, hover animacijama i unikatnim oblicima modova.
+*/
+/* Friv-like Menu Style */
+
+.friv-grid-container {
+    margin-top: 25px;
+    animation: fadeIn 0.5s ease;
+}
+
+.friv-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.friv-tile {
+    aspect-ratio: 1; /* Kvadratast oblik kao Friv */
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Razmak između ikone i teksta */
+    align-items: center;
+    padding: 12px 5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background-size: 200% auto;
+}
+
+.friv-tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%);
+    border-radius: 15px;
+    pointer-events: none;
+}
+
+.friv-tile:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    border-color: rgba(255, 255, 255, 0.6);
+    background-position: right center;
+}
+
+.friv-tile:active {
+    transform: scale(0.95);
+}
+
+.tile-icon {
+    flex: 1; /* Zauzmi sav dostupan gornji prostor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    transition: transform 0.3s ease;
+}
+
+.tile-icon svg {
+    overflow: visible !important; /* Spriječava odsijecanje animacija! */
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.friv-tile:hover .tile-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Friv vividly colored gradients */
+.friv-tile.career {
+    background-image: linear-gradient(135deg, #FFD700 0%, #FFA500 51%, #FF8C00 100%);
+}
+
+.friv-tile.training {
+    background-image: linear-gradient(135deg, #00c6ff 0%, #0072ff 51%, #00c6ff 100%);
+}
+
+.friv-tile.daily {
+    background-image: linear-gradient(135deg, #ff416c 0%, #ff4b2b 51%, #ff416c 100%);
+}
+
+.friv-tile.minedash {
+    background-image: linear-gradient(135deg, #DA22FF 0%, #9733EE 51%, #DA22FF 100%);
+}
+
+.friv-tile.treasure {
+    background-image: linear-gradient(135deg, #11998e 0%, #38ef7d 51%, #11998e 100%);
+}
+
+.friv-tile.chain {
+    background-image: linear-gradient(135deg, #f12711 0%, #f5af19 51%, #f12711 100%);
+}
+
+.friv-tile.zen {
+    background-image: linear-gradient(135deg, #56ab2f 0%, #a8e063 51%, #56ab2f 100%);
+}
+
+.friv-tile.fog {
+    background-image: linear-gradient(135deg, #434343 0%, #000000 51%, #434343 100%);
+}
+
+/* Force some SVG elements to white to be visible on dark colors */
+.friv-tile .tile-icon svg circle,
+.friv-tile .tile-icon svg path,
+.friv-tile .tile-icon svg rect {
+    stroke: #ffffff;
+}
+.friv-tile.daily .tile-icon svg path,
+.friv-tile.daily .tile-icon svg circle {
+    fill: rgba(255,255,255,0.4);
+    stroke: #ffffff;
+}
+
+/* Specijalna prilagodba za coin iz Treasure Hunter da ostane žut/zlatan */
+.friv-tile.treasure .tile-icon svg circle,
+.friv-tile.career .tile-icon svg path {
+    stroke: #ffffff;
+}
+
+.tile-title {
+    height: 30px; /* Fiksna visina za centriranje obije linije teksta */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+    .friv-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .tile-title {
+        font-size: 0.8rem;
+    }
+    .tile-icon {
+        margin-bottom: 8px;
+    }
+}

@@ -1,3 +1,9 @@
+/* 
+   MINESWEEPER PRO+ - DATABASE SCHEMA
+   SQL skripta za kreiranje potrebnih tablica u MySQL bazi podataka.
+   Uključuje tablice za korisnike, statistiku, leaderboard i dnevne izazove.
+*/
+
 DROP DATABASE IF EXISTS minesweeper_db;
 CREATE DATABASE IF NOT EXISTS minesweeper_db;
 USE minesweeper_db;

@@ -1,69 +1,177 @@
-=========================================
-      MINESWEEPER PRO - UPUTE I VODIČ
-=========================================
+=============================================================================
+                      💣 MINESWEEPER PRO+ 💣
+                        UPUTE I VODIČ ZA AGENTE
+=============================================================================
 
-Dobrodošli u Minesweeper Pro, naprednu verziju legendarne igre s RPG elementima, progresijom i posebnim modovima. Ispod su detaljni opisi svih mehanika.
+Dobrodošli u Minesweeper Pro+, najnapredniju simulaciju taktičkog deminiranja. 
+Ovaj dokument služi kao potpuni referentni priručnik za sve mehanike, modove igre,
+detaljnu tehničku arhitekturu koda te najčešća pitanja o implementaciji.
 
-1. MEHANIKA COINSA (VALUTA IGRE)
------------------------------------------
-Coins (novčići) u ovoj igri predstavljaju tvoje iskustvo i resurse.
-- Kako zaraditi: Svaki put kada uspješno očistiš minu ili pobijediš u partiji, dobivaš coinese. Sustav broji "Mines Cleared" (očišćene mine). Što je veća težina i što više polja otvoriš, to više zarađuješ.
-- Svrha: Coinsi se troše na "Crnom tržištu" (Shop) za kupnju perka koji ti pomažu u teškim situacijama.
-- Napomena: Gosti (Guest mode) ne mogu sakupljati coinese niti kupovati na marketplaceu.
+--- [ SADRŽAJ ] -------------------------------------------------------------
+  1. EKONOMIJA I PERKOVI
+  2. STANDARDNI MODI IGRE (Karijera, Trening, Dnevni Izazov)
+  3. SPECIJALNE OPERACIJE (Mini-igre)
+  4. BRZI PREGLED KONTROLA
+  5. TEHNIČKA ARHITEKTURA (Pregled datoteka)
+  6. FUNKCIJSKI VODIČ (Glavne funkcije po datotekama)
+  7. Q&A - ARHITEKTURALNA PITANJA I ODGOVORI
+-----------------------------------------------------------------------------
 
-2. CRNO TRŽIŠTE (SHOP / PERKOVI)
------------------------------------------
-U meniju igre možeš pristupiti trgovini gdje kupuješ:
-- RADAR (Skeniranje): Nakon kupnje, tvoj sljedeći klik na bilo koje zatvoreno polje neće ga otvoriti, već će skenirati 3x3 područje oko njega. Radar će otkriti gdje su mine i brojeve, ali će se polja nakon 2.5 sekunde ponovno sakriti. To ti omogućuje da planiraš unaprijed bez rizika.
-- DEFUSE KIT (Oklop): Ovo je pasivna zaštita. Ako slučajno klikneš na minu, oklop će je deaktivirati, pretvoriti to polje u sigurno polje (broj) i spasiti te od smrti. Oklop se troši nakon prve pogođene mine.
 
-3. TRAINING MODE (TRENING)
------------------------------------------
-Ovo je klasično iskustvo Minesweepera, ali sa modernim dodacima.
-- Težine: 
-  * Easy (Lagano): 6x6 mapa, 4 mine.
-  * Medium (Srednje): 10x10 mapa, 15 mina.
-  * Hard (Teško): 15x15 mapa, 45 mina.
-  * Impossible (Nemoguće): 20x20 mapa, 85 mina.
-  * Custom: Sam biraš veličinu (do 30x30) i broj mina.
-- Cilj: Otvoriti sva polja koja nisu mine.
+=============================================================================
+ 1. EKONOMIJA I PERKOVI (CRNO TRŽIŠTE)
+=============================================================================
+Napredovanje kroz igru nagrađuje vas lokalnom valutom: Coins (novčićima).
 
-4. CAREER MODE (KARIJERA)
------------------------------------------
-Ovo je osnovni mod za progresiju.
-- Progresija: Počinješ od Nivoa 1. Svaka pobjeda te prebacuje na sljedeći nivo koji je progresivno teži (veća mapa, više mina).
-- Leaderboard: Tvoj napredak (Nivo i sakupljeni Coinsi) sprema se u bazu podataka i rangira te na globalnoj ljestvici.
-- Cilj: Dosegnuti što veći nivo i postati "Master Minesweeper".
+💰 KAKO ZARADITI?
+- Svaka očišćena mina i pobjeda u igri donosi resurse.
+- Veća težina polja = veća fiksna zarada.
 
-5. DNEVNI IZAZOV (DAILY CHALLENGE)
------------------------------------------
-- Svaki dan se generira ista mapa za sve igrače na svijetu (koristi se fiksni seed baziran na datumu).
-- Testiraj svoje vještine protiv ostatka zajednice na mapi koja je optimizirana za srednju težinu (15x15, 40 mina).
-- Cilj: Riješiti mapu što brže i bez greške.
+🛠️ CRNO TRŽIŠTE (SHOP):
+Na glavnom meniju nudi vam se nabavka taktičke opreme:
+  [📡] RADAR (50 C) : Skenira 3x3 područje. Prikazuje mine na 2.5 sekunde.
+  [🛡️] DEFUSE KIT (100 C) : Spašava život jednom pri naletu na minu.
 
-6. MINI GAMES (MINI IGRE)
------------------------------------------
 
-A) MINE DASH (Trka kroz mine)
-- Mehanika: Igra je fokusirana na brzinu (Time Attack). Imaš horizontalnu stazu od 10 polja. U svakom stupcu postoji samo jedno sigurno polje, ostalo su mine.
-- Cilj: Što brže kliknuti na siguran put s lijeva na desno. Svaki točan klik dodaje +2 sekunde na tajmer. Ako stigneš do kraja prije isteka vremena, pobjeđuješ.
+=============================================================================
+ 2. STANDARDNI MODI IGRE
+=============================================================================
 
-B) TREASURE HUNTER (Memorijski izazov)
-- Mehanika: Na samom početku igre, na 2 sekunde će se prikazati sve mine na mapi, a nakon toga će nestati i polja će postati prazna.
-- Cilj: Moraš zapamtiti gdje su bile mine i kliknuti na sva OSTALA polja. Ako pogodiš mjesto gdje je bila mina (koju si vidio na početku), gubiš. Ovo testira tvoju vizualnu memoriju.
+🎯 TRENING (Training)
+Klasičan Minesweeper. Razine: Easy (6x6), Medium (10x10), Hard (15x15), Impossible (20x20).
+Custom mod dopušta kreiranje mapa do 30x30.
 
-C) CHAIN REACTION (Puzzle / Logika)
-- Mehanika: Dobivaš mapu koja je već djelomično riješena, ali imaš ograničen broj "Energije" (zastavica).
-- Cilj: Umjesto otvaranja polja, ovdje je fokus na označavanju mina zastavicama (desni klik ili long press). Svaka pogrešno postavljena zastavica na sigurno polje troši tvoju energiju. Moraš označiti točno onoliko mina koliko piše na HUD-u da bi pobijedio.
+🏆 KARIJERA (Career Mode)
+Stalna progresija. Svaka pobjeda povećava vaš Level. Što je veći level, veća je 
+mapa i broj mina, ali i prestiž na globalnoj ljestvici.
 
-7. KAKO IGRATI I CILJEVI (SAŽETAK)
------------------------------------------
+🗓️ DNEVNI IZAZOV (Daily Challenge)
+Fiksni "seed" generiran na osnovu današnjeg datuma. Svi igrači igraju istu mapu.
 
-| Mod | Kontrole | Cilj |
-| :--- | :--- | :--- |
-| **Training / Career** | Lijevi klik (Otvori), Desni klik (Zastavica) | Otvoriti sva "čista" polja. |
-| **Mine Dash** | Brzi lijevi klikovi | Pronaći put do desne strane prije isteka vremena. |
-| **Treasure Hunter** | Lijevi klik (po pamćenju) | Otvoriti sva polja koja NISU bila prikazana kao mine. |
-| **Chain Reaction** | Desni klik (Zastavica) | Pravilno označiti sve mine s ograničenom energijom. |
 
-OSNOVNO PRAVILO: Brojevi ti govore koliko se mina nalazi u 8 susjednih polja. Koristi logiku, planiraj poteze i postani najbolji agent na terenu!
+=============================================================================
+ 3. SPECIJALNE OPERACIJE (MINI IGRE)
+=============================================================================
+
+⚡ MINE DASH (Trka kroz mine)
+Brzinski mod. Morate uloviti točna polja u nizu dok vrijeme ističe. Točan klik = +2s.
+
+💎 TREASURE HUNTER (Memorija)
+Mine se vide na početku 2 sekunde, a onda nestaju. Morate otvoriti sva prazna
+polja isključivo po sjećanju.
+
+🧩 CHAIN REACTION (Bez otvaranja)
+Ploča je već "otvorena" brojevima. Vaš zadatak je postaviti zastavice bez greške.
+Svaka kriva zastavica oduzima vam energiju (HP).
+
+🧘 ZEN VRT (Relax mod)
+Nema smrti. Svaki klik na minu samo je označi kvačicom. Za opušteno igranje.
+
+🌫️ MAGLA (Fog of War)
+CIjela mapa je crna (mrak). Vidite samo radius oko zadnjeg polja koje ste kliknuli.
+
+
+=============================================================================
+ 4. BRZI PREGLED KONTROLA
+=============================================================================
+Lijevi klik: Otkrivanje polja (reveal).
+Desni klik: Postavljanje zastavice (flag).
+Chording: Klik na broj (ako je oko njega već postavljen ispravan broj zastavica) 
+automatski otvara sva ostala susjedna polja.
+
+
+=============================================================================
+ 5. TEHNIČKA ARHITEKTURA (Pregled datoteka)
+=============================================================================
+
+[ ROOT ]
+• index.html : Glavna struktura aplikacije. Sadrži kontejnere za modale, grid za 
+               igru i upravljanje svim vizualnim elementima (HUB).
+• api.php    : Backend kontroler (PHP). Upravlja SQL bazom, SQL transakcijama 
+               (spremanje coinsa, levela) i vraća Leaderboard podatke u JSON formatu.
+• baza.sql   : SQL shema tablica za korisnike, njihove tokene i postignuća.
+
+[ /CSS ]
+• base.css   : Globalni stilovi (layout, fontovi, glassmorphism kartice).
+• friv.css   : Stilovi za 3D tile izbornik (Friv stil). Gradijenti i animacije tilesa.
+• game.css   : Dizajn same igračke ploče (ćelija, boja brojeva, efekti eksplozije).
+• themes.css : Skup klasa (.theme-neon, .theme-ocean, itd.) koje mijenjaju izgled 
+               cijele aplikacije i boja pločica jednim klikom.
+
+[ /JS ]
+• globals.js : Pohrana globalnih varijabli (level, coins, player name, grid array).
+• game.js    : Logika igre. Algoritmi za postavljanje mina, BFS algoritam za 
+               automatsko otvaranje praznih polja (flood fill) i mehanike mini-igara.
+• ui.js      : Upravlja DOM-om. Otvaranje/zatvaranje modala, učitavanje tema sa 
+               localStorage, animacije (konfeti, notifikacije).
+• svg-loader.js: Sustav za rendering vektorskih ikona. Sadrži veliki objekt 'Icons' s 
+               sirovim SVG kodom koji se ubrizgava u 'data-svg' elemente.
+• timer.js   : Upravlja vremenom partije i specifičnim timerima u mini-igrama.
+• api.js     : JS klijent za komunikaciju s api.php (fetch() pozivi).
+• cheats.js  : Developer konzola za testiranje (xray(), godmode(), addCoins(n)).
+
+
+=============================================================================
+ 6. FUNKCIJSKI VODIČ (Glavne funkcije)
+=============================================================================
+
+[ game.js ]
+• initGame() : Resetira stanje i kreira Grid matricu (dvodimenzionalni niz objekata).
+• placeMines() : Nasumično razmješta mine pazeći da se mina ne pojavi na prvom kliku.
+• revealCell(x, y) : Glavna funkcija koja otvara polje. Ako je polje prazno (0), 
+                     rekurzivno poziva otvaranje susjeda.
+• checkWin() : Provjerava je li broj zatvorenih polja jednak broju mina.
+
+[ ui.js ]
+• applyTheme() : Dohvaća ime teme iz localStorage i primjenjuje odgovarajuću 
+                 klasu na <body> element (npr. body.theme-matrix).
+• showOverlay(title, text) : Prikazuje pobjednički/gubitnički modal s ikonom.
+• openThemeModal() : Prikazuje prozor za izbor dizajna (Theming Terminal).
+
+[ svg-loader.js ]
+• injectStaticSVGs() : Prolazi kroz cijeli HTML i u svaki element koji ima `data-svg="ime"`
+                       ubrizgava odgovarajući SVG kod iz memorije.
+
+
+=============================================================================
+ 7. Q&A - ARHITEKTURALNA PITANJA I ODGOVORI
+=============================================================================
+
+P: Kako se vrši odabir game moda u Friv izborniku?
+O: Svaka pločica u Friv gridu ima onclick događaj koji poziva `startGame('ImeModa')`. 
+   Funkcija `startGame` u game.js uzima taj parametar, postavlja konfiguraciju 
+   (veličinu mape i broj mina) te pokreće `initGame()`.
+
+P: Na koji način radi sustav učitavanja tema bez ponovnog učitavanja stranice?
+O: Sustav koristi CSS specifičnost (Specificity). Sve teme su definirane u 
+   themes.css kao podklase body elementa (npr. `body.theme-neon .card`). Kada u 
+   JS-u pomoću `applyTheme()` promijenimo klasu na <body> elementu, CSS pravila 
+   se automatski ažuriraju za sve elemente na ekranu.
+
+P: Kako radi SVG sustav (zašto ne koristite .svg slike)?
+O: Korištenje inline SVG koda (preko svg-loader.js) omogućuje nam tri stvari: 
+   1. Nema HTTP requestova za svaku sliku (brže učitavanje). 
+   2. Možemo animirati dijelove SVG-a direktno kroz CSS. 
+   3. Dinamički mijenjamo boje (`fill="currentColor"`) što nam omogućuje da 
+      ikone mijenjaju stil ovisno o odabranoj temi.
+
+P: Kako je osigurana sigurnost spremanja rezultata i coinsa?
+O: Rezultati se ne spremaju lokalno na klijentu gdje ih korisnik može lako izmijeniti. 
+   Umjesto toga, js poziva `api.js` (fetch), koji šalje podatke PHP backendu. 
+   Backend vrši provjeru i tek onda vrši upis u SQL bazu. Kod Daily Challenge-a, 
+   provjerava se i integritet "seeda".
+
+P: Kako radi flood-fill (automatsko otvaranje praznih polja)?
+O: Koristi se rekurzivni pristup u funkciji `revealCell`. Ako polje koje ste kliknuli 
+   ima 0 susjednih mina, algoritam automatski poziva `revealCell` za svih 8 
+   susjednih polja, sve dok ne dođe do polja s brojem.
+
+P: Kako radi Daily Challenge (Dnevni Izazov) sustav?
+O: Koristimo Mulberry32 algoritam koji je deterministički PRNG (Pseudo-Random 
+   Number Generator). Kao ulazni parametar (seed) dobiva trenutni datum 
+   (YYYYMMDD). To garantira da će funkcija za generiranje mina na svim 
+   računalima svijeta danas vratiti identičan raspored mina.
+
+=============================================================================
+      Dokumentacija ažurirana v3.5. Spremno za deployment. 🎓
+=============================================================================
